@@ -1,0 +1,12 @@
+{
+  "name": "lisa",
+  "version": "1.0.0",
+  "description": "my personal assistant",
+  "bin": "index.js",
+  "main": "lisa",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "zapo",
+  "license": "ISC"
+}
