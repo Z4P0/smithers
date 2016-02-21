@@ -2,20 +2,59 @@
 
 var say = require('say');
 var program = require('commander');
+var moment = require('moment');
 
-program
-  .version('0.0.1')
-  .option('-p, --peppers', 'Add peppers')
-  .option('-P, --pineapple', 'Add pineapple')
-  .option('-b, --bbq-sauce', 'Add bbq sauce')
-  .option('-c, --cheese [type]', 'Add the specified type of cheese [marble]', 'marble')
-  .parse(process.argv);
+/**
+ * says hello and creates a new text file for the day
+ */
+function morning () {
 
-console.log('you ordered a pizza with:');
-if (program.peppers) console.log('  - peppers');
-if (program.pineapple) console.log('  - pineapple');
-if (program.bbqSauce) console.log('  - bbq');
-console.log('  - %s cheese', program.cheese);
+  var now = moment();
+  var script = '';
+
+  // good morning, $user
+  script += 'good morning, ' + process.env.USER + '.\n';
+
+  // it's sunday february 21
+  script += 'it\'s ' + now.format('dddd, MMMM Do') + '.';
+
+  console.log(script);
+  say.speak(script);
+
+
+//   touch $TODAYS_FILE
+//   today
+
+}
+
+morning();
+
+// the today command
+
+// export NOTEBOOK=~/notebook
+
+// # generate the filename for today
+// MONTH=$(echo $(date '+%b') | tr '[A-Z]' '[a-z]')
+// DAY=$(date '+%d')
+// # ~/notebook/oct-15.txt
+// export TODAYS_FILE=$NOTEBOOK/$MONTH-$DAY.txt
+
+
+
+
+// program
+//   .version('0.0.1')
+//   .option('-p, --peppers', 'Add peppers')
+//   .option('-P, --pineapple', 'Add pineapple')
+//   .option('-b, --bbq-sauce', 'Add bbq sauce')
+//   .option('-c, --cheese [type]', 'Add the specified type of cheese [marble]', 'marble')
+//   .parse(process.argv);
+
+// console.log('you ordered a pizza with:');
+// if (program.peppers) console.log('  - peppers');
+// if (program.pineapple) console.log('  - pineapple');
+// if (program.bbqSauce) console.log('  - bbq');
+// console.log('  - %s cheese', program.cheese);
 
 
 
@@ -35,34 +74,6 @@ console.log('  - %s cheese', program.cheese);
 // });
 
 
-
-
-// say.speak('good morning, ' + process.env.USER, 'Kathy', 120);
-say.speak('good morning, ' + process.env.USER);
-
-// the today command
-
-// export NOTEBOOK=~/notebook
-
-// # generate the filename for today
-// MONTH=$(echo $(date '+%b') | tr '[A-Z]' '[a-z]')
-// DAY=$(date '+%d')
-// # ~/notebook/oct-15.txt
-// export TODAYS_FILE=$NOTEBOOK/$MONTH-$DAY.txt
-
-// # we only create a new file if we run the 'morning' command
-// function morning {
-//   SCRIPT="good mornin' $USER. it's $(date '+%A, %B %e')"
-
-//   touch $TODAYS_FILE
-
-//   clear
-//   echo
-//   echo $SCRIPT
-//   say $SCRIPT
-//   echo
-//   today
-// }
 
 // # reopen the text file for today
 // function today {
