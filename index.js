@@ -1,18 +1,21 @@
 #!/usr/bin/env node
 
-var say = require('say');
-var program = require('commander');  // * to finish
-var moment = require('moment');
 var fs = require('fs');
+var say = require('say');
 var path = require('path');
 var open = require('open');
 var clear = require('clear');
+var moment = require('moment');
+var program = require('commander');
+
+
+
 
 
 /**
  * says hello and creates a new text file for the day
  */
-function morning() {
+function morning(shh) {
 
   var script = '';
   script += 'good morning, ' + process.env.USER + '.\n'; // say hello
@@ -21,10 +24,14 @@ function morning() {
 
   clear();
   console.log(script);
-  say.speak(script);
 
-  today();
+  say.speak(script, 'Alex', undefined, function(err) {
+    if (err) throw err;
+    today();
+  });
+
 }
+
 
 
 /**
@@ -48,10 +55,15 @@ function today() {
       open(filePath);
     }
   });
+
 }
 
 
 
+/**
+ * open yesterday's file, if itexists
+ * @return {[type]} [description]
+ */
 function yesterday() {
 
   var filename = moment().subtract(1, 'days').format('MMM-DD').toLowerCase() + '.txt';
@@ -62,23 +74,22 @@ function yesterday() {
     if (err) console.log('no file for yesterday');
     else open(filePath);
   });
+
 }
 
 
 
 
+// i don't think i did this right... /shrug
+program
+  .version('0.0.1')
+  .command('morning')
+  .action(morning);
+program
+  .command('today')
+  .action(today);
+program
+  .command('yesterday')
+  .action(yesterday);
 
-
-// program
-//   .version('0.0.1')
-//   .option('-p, --peppers', 'Add peppers')
-//   .option('-P, --pineapple', 'Add pineapple')
-//   .option('-b, --bbq-sauce', 'Add bbq sauce')
-//   .option('-c, --cheese [type]', 'Add the specified type of cheese [marble]', 'marble')
-//   .parse(process.argv);
-
-// console.log('you ordered a pizza with:');
-// if (program.peppers) console.log('  - peppers');
-// if (program.pineapple) console.log('  - pineapple');
-// if (program.bbqSauce) console.log('  - bbq');
-// console.log('  - %s cheese', program.cheese);
+program.parse(process.argv);
