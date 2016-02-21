@@ -3,41 +3,56 @@
 var say = require('say');
 var program = require('commander');
 var moment = require('moment');
+var fs = require('fs');
+var path = require('path');
+var open = require('open');
+
 
 /**
  * says hello and creates a new text file for the day
  */
-function morning () {
+function morning() {
 
-  var now = moment();
   var script = '';
-
-  // good morning, $user
-  script += 'good morning, ' + process.env.USER + '.\n';
-
-  // it's sunday february 21
-  script += 'it\'s ' + now.format('dddd, MMMM Do') + '.';
+  script += 'good morning, ' + process.env.USER + '.\n'; // say hello
+  script += 'it\'s ' + moment().format('dddd, MMMM Do') + '.';  // date
+  // to do: weather?
 
   console.log(script);
   say.speak(script);
 
-
-//   touch $TODAYS_FILE
-//   today
-
+  today();
 }
 
-morning();
 
-// the today command
+/**
+ * open the text file for the day
+ */
+function today() {
 
-// export NOTEBOOK=~/notebook
+  // filename
+  var filename = moment().format('MMM-DD').toLowerCase() + '.txt';
+  var filePath = path.join(process.env.NOTEBOOK, filename);
 
-// # generate the filename for today
-// MONTH=$(echo $(date '+%b') | tr '[A-Z]' '[a-z]')
-// DAY=$(date '+%d')
-// # ~/notebook/oct-15.txt
-// export TODAYS_FILE=$NOTEBOOK/$MONTH-$DAY.txt
+  // open file, create one if it doesn't exits
+  fs.stat(filePath, function(err, stats) {
+    // create the file if err
+    if (err) {
+      fs.writeFile(filePath, '', function(err) {
+        if (err) throw err;
+        open(filePath);
+      });
+    } else {
+      open(filePath);
+    }
+  });
+}
+
+today();
+
+
+
+
 
 
 
@@ -56,33 +71,6 @@ morning();
 // if (program.bbqSauce) console.log('  - bbq');
 // console.log('  - %s cheese', program.cheese);
 
-
-
-// use default voice in System Preferences
-// say.speak('Hello!');
-
-// // no callback, fire and forget
-// say.speak('whats up, dog?', 'Alex', 20);
-
-// // output some text to the console as the callback
-// say.speak('whats up, dog?', 'Good News', undefined, function(error) {
-//   if (error) {
-//     return console.log(error);
-//   }
-
-//   console.log('text to speech complete');
-// });
-
-
-
-// # reopen the text file for today
-// function today {
-//   # check if there is one for today
-//   if [ ! -f $TODAYS_FILE ]; then
-//       echo "creating file..."
-//   fi
-//   subl $TODAYS_FILE
-// }
 
 
 
