@@ -40,8 +40,6 @@ console.log('  - %s cheese', program.cheese);
 // say.speak('good morning, ' + process.env.USER, 'Kathy', 120);
 say.speak('good morning, ' + process.env.USER);
 
-// good morning command
-
 // the today command
 
 // export NOTEBOOK=~/notebook

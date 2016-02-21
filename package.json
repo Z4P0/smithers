@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "commander": "^2.9.0",
+    "moment": "^2.11.2",
     "say": "^0.8.0"
   }
 }
