@@ -1,5 +1,5 @@
 {
-  "name": "hal",
+  "name": "smithers",
   "version": "1.0.0",
   "description": "my personal assistant",
   "bin": "index.js",
