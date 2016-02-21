@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var say = require('say');
-var program = require('commander');
+var program = require('commander');  // * to finish
 var moment = require('moment');
 var fs = require('fs');
 var path = require('path');
@@ -48,9 +48,19 @@ function today() {
   });
 }
 
-today();
 
 
+function yesterday() {
+
+  var filename = moment().subtract(1, 'days').format('MMM-DD').toLowerCase() + '.txt';
+  var filePath = path.join(process.env.NOTEBOOK, filename);
+
+  // open file, only if it exitst. do not create one if it doesn't exist already
+  fs.stat(filePath, function(err, stats) {
+    if (err) console.log('no file for yesterday');
+    else open(filePath);
+  });
+}
 
 
 
@@ -70,11 +80,3 @@ today();
 // if (program.pineapple) console.log('  - pineapple');
 // if (program.bbqSauce) console.log('  - bbq');
 // console.log('  - %s cheese', program.cheese);
-
-
-
-
-
-
-
-// yesterday
