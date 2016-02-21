@@ -6,6 +6,7 @@ var moment = require('moment');
 var fs = require('fs');
 var path = require('path');
 var open = require('open');
+var clear = require('clear');
 
 
 /**
@@ -18,6 +19,7 @@ function morning() {
   script += 'it\'s ' + moment().format('dddd, MMMM Do') + '.';  // date
   // to do: weather?
 
+  clear();
   console.log(script);
   say.speak(script);
 
