@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "my personal assistant",
   "bin": "index.js",
-  "main": "lisa",
+  "main": "smithers",
   "scripts": {
     "env": "env",
     "test": "echo \"Error: no test specified\" && exit 1"

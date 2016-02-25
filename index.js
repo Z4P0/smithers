@@ -41,6 +41,7 @@ function today() {
 
   // filename
   var filename = moment().format('MMM-DD').toLowerCase() + '.txt';
+  if (process.env.NOTEBOOK === undefined) console.log('NOTEBOOK environment variable doesn\'t exist');
   var filePath = path.join(process.env.NOTEBOOK, filename);
 
   // open file, create one if it doesn't exits
@@ -93,3 +94,10 @@ program
   .action(yesterday);
 
 program.parse(process.argv);
+
+
+module.exports = {
+  morning: morning,
+  today: today,
+  yesterday: yesterday
+}
