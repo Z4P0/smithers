@@ -11,10 +11,10 @@
   "author": "zapo",
   "license": "ISC",
   "dependencies": {
-    "clear": "0.0.1",
-    "commander": "^2.9.0",
-    "moment": "^2.11.2",
-    "open": "0.0.5",
-    "say": "^0.8.0"
+    "clear": "0.1.0",
+    "commander": "8.0.0",
+    "moment": "2.29.1",
+    "open": "8.2.1",
+    "say": "0.16.0"
   }
 }
