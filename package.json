@@ -13,7 +13,7 @@
   "dependencies": {
     "clear": "0.1.0",
     "commander": "8.0.0",
-    "moment": "2.29.1",
+    "moment": "2.29.2",
     "open": "8.2.1",
     "say": "0.16.0"
   }
